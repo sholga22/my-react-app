@@ -1,24 +1,33 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
-import { teacherConfig } from '../types/entities';
 
-// Функция генерации формы для добавления учителя
-export function AddEntity() {
+
+type AddEntityProps = {
+  config: EntityConfig;
+};
+
+// universal form (with configuration) for entering teacher/student/subject data in sidebar
+// is used in Home.tsx
+
+export function AddEntity({ config }: AddEntityProps) {
   const { register, handleSubmit, reset } = useForm();
 
   const onSubmit = (data: any) => {
-    console.log('Добавляем учителя:', data);
+    console.log(`Add new ${config.apiEndpoint}:`, data);
     reset();
   };
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <label htmlFor="firstName">{teacherConfig.fields[0].label}</label>
-      <input
-        id="firstName"
-        {...register('firstName', { required: teacherConfig.fields[0].required })}
-        type="text"
-      />
+      {config.fields.map((field) => (
+        <div key={field.name}>
+          <label htmlFor={field.name}>{field.label}</label>
+          <input
+            id={field.name}
+            type={field.type}
+            {...register(field.name, { required: field.required })}
+          />
+        </div>
+      ))}
       <button type="submit">Add</button>
     </form>
   );
