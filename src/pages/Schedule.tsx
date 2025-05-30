@@ -4,11 +4,8 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
-import { INITIAL_EVENTS, createEventId } from '../event-utils'
+import { INITIAL_EVENTS, createEventId } from '../event-utils.ts'
 
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
-import { Navbar } from '../components/navbar';
 
 import '../App.css'
 import '../index.css'
