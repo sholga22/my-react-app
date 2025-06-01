@@ -20,7 +20,7 @@ export type EntityConfig = {
 
 export const teacherConfig: EntityConfig = {
   title: "Add new teacher",
-  apiEndpoint: '/teachers',
+  apiEndpoint: 'teachers',
   fields: [
     { name: 'name', label: 'Name', type: 'text', required: true },
     { name: 'phone', label: 'Phone', type: 'text', required: true }
@@ -29,7 +29,7 @@ export const teacherConfig: EntityConfig = {
 
 export const studentConfig: EntityConfig = {
   title: "Add new student",
-  apiEndpoint: '/students',
+  apiEndpoint: 'students',
   fields: [
     { name: 'name', label: 'Name', type: 'text', required: true },
     { name: 'email', label: 'E-mail', type: 'email', required: true },
@@ -39,7 +39,7 @@ export const studentConfig: EntityConfig = {
 
 export const subjectConfig: EntityConfig = {
   title: "Add new subject",
-  apiEndpoint: '/subjects',
+  apiEndpoint: 'subjects',
   fields: [
     { name: 'name', label: 'Name', type: 'text', required: true },
     { name: 'level', label: 'Level', type: 'text', required: false }

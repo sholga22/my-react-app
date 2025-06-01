@@ -1,5 +1,5 @@
 import { useForm } from 'react-hook-form';
-
+import type { EntityConfig } from '../config/configEntities';
 
 type AddEntityProps = {
   config: EntityConfig;
@@ -9,13 +9,39 @@ type AddEntityProps = {
 // is used in Home.tsx
 
 export function AddEntity({ config }: AddEntityProps) {
-  const { register, handleSubmit, reset } = useForm();
+  const { register, handleSubmit, reset, formState: { errors } } = useForm();
 
-  const onSubmit = (data: any) => {
-    console.log(`Add new ${config.apiEndpoint}:`, data);
-    reset();
+  // universal type for storing teacher/student/subject data
+  type FormData = {
+    [key: string]: any;  // for date from form
   };
 
+  const onSubmit = async (data: FormData) => {
+    console.log(`Add new ${config.apiEndpoint}:`, data);
+    reset();
+
+
+    // fetch API
+
+    try {
+      const response = await fetch(`http://localhost:3001/${config.apiEndpoint}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        console.log(`New ${config.apiEndpoint} was added:`, data);
+        reset();
+      } else {
+        console.error('Save error');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  // my form on Sidebar
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {config.fields.map((field) => (
@@ -26,9 +52,11 @@ export function AddEntity({ config }: AddEntityProps) {
             type={field.type}
             {...register(field.name, { required: field.required })}
           />
+          {errors[field.name] && <p style={{ color: 'red' }}>Это поле обязательно</p>}
         </div>
       ))}
       <button type="submit">Add</button>
     </form>
   );
 }
+

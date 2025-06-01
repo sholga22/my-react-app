@@ -17,6 +17,7 @@
     "@fullcalendar/timegrid": "^6.1.17",
     "@hookform/resolvers": "^5.0.1",
     "fs": "^0.0.1-security",
+    "json-server": "^0.17.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-hook-form": "^7.56.4",

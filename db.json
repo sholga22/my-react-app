@@ -1,3 +1,64 @@
 {
-  "teachers": []
+  "teachers": [
+    {
+      "name": "Sakara",
+      "phone": "01604509210",
+      "id": 1
+    },
+    {
+      "name": "Olga Sakara",
+      "phone": "+380677858243",
+      "id": 2
+    },
+    {
+      "name": "Olga",
+      "phone": "+380674844993",
+      "id": 3
+    },
+    {
+      "name": "Шконда Олександр ",
+      "phone": "+38(067)484-4893",
+      "id": 4
+    },
+    {
+      "name": "Sakara",
+      "phone": "+38(067)484-4893",
+      "id": 5
+    },
+    {
+      "name": "Apinsh",
+      "phone": "01604509210",
+      "id": 6
+    }
+  ],
+  "students": [
+    {
+      "name": "Apinsh",
+      "email": "sholga.ua@gmail.com",
+      "phone": "01604509210",
+      "id": 1
+    }
+  ],
+  "subjects": [
+    {
+      "name": "English",
+      "level": "C1",
+      "id": 1
+    },
+    {
+      "name": "German",
+      "level": "C1",
+      "id": 2
+    },
+    {
+      "name": "Ukrainian",
+      "level": "С2",
+      "id": 3
+    },
+    {
+      "name": "Italian",
+      "level": "B2",
+      "id": 4
+    }
+  ]
 }
