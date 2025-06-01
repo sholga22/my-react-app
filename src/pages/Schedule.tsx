@@ -6,6 +6,7 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from '../event-utils.ts'
 
+import { AddEvent } from '../components/AddEvent'
 
 import '../App.css'
 import '../index.css'
@@ -47,87 +48,85 @@ export default function App() {
 
 
   return (
-    
-      <div className='schedule'>
-        <Sidebar
-          weekendsVisible={weekendsVisible}
-          handleWeekendsToggle={handleWeekendsToggle}
-          currentEvents={currentEvents} />
-        <div className='schedule-main'>
-          <FullCalendar
-            plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-            headerToolbar={{
-              left: 'prev,next today',
-              center: 'title',
-              right: 'dayGridMonth,timeGridWeek,timeGridDay'
-            }}
-            initialView='dayGridMonth'
-            editable={true}
-            selectable={true}
-            selectMirror={true}
-            dayMaxEvents={true}
-            weekends={weekendsVisible}
-            initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
-            select={handleDateSelect}
-            eventContent={renderEventContent} // custom render function
-            eventClick={handleEventClick}
-            eventsSet={handleEvents} // called after events are initialized/added/changed/removed
-          />
-        </div>
+
+    <div className='schedule'>
+      <Sidebar
+        weekendsVisible={weekendsVisible}
+        handleWeekendsToggle={handleWeekendsToggle}
+        currentEvents={currentEvents} />
+      <div className='schedule-main'>
+        <FullCalendar
+          plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
+          headerToolbar={{
+            left: 'prev,next today',
+            center: 'title',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay'
+          }}
+          initialView='dayGridMonth'
+          editable={true}
+          selectable={true}
+          selectMirror={true}
+          dayMaxEvents={true}
+          weekends={weekendsVisible}
+          initialEvents={INITIAL_EVENTS} // alternatively, use the `events` setting to fetch from a feed
+          select={handleDateSelect}
+          eventContent={renderEventContent} // custom render function
+          eventClick={handleEventClick}
+          eventsSet={handleEvents} // called after events are initialized/added/changed/removed
+        />
       </div>
-    
-    )
-}
-    
+    </div>
 
-      function renderEventContent(eventInfo) {
-  return (
-      <>
-        <b>{eventInfo.timeText}</b>
-        <i>{eventInfo.event.title}</i>
-      </>
-      )
+  )
 }
 
-      function Sidebar({weekendsVisible, handleWeekendsToggle, currentEvents}) {
+
+function renderEventContent(eventInfo) {
   return (
-      <div className='schedule-sidebar'>
-        <div className='schedule-sidebar-section'>
-          <h2>Instructions</h2>
-          <ul>
-            <li>Select dates and you will be prompted to create a new event</li>
-            <li>Drag, drop, and resize events</li>
-            <li>Click an event to delete it</li>
-          </ul>
-        </div>
-        <div className='schedule-sidebar-section'>
-          <label>
-            <input
-              type='checkbox'
-              checked={weekendsVisible}
-              onChange={handleWeekendsToggle}
-            ></input>
-            toggle weekends
-          </label>
-        </div>
-        <div className='schedule-sidebar-section'>
-          <h2>All Events ({currentEvents.length})</h2>
-          <ul>
-            {currentEvents.map((event) => (
-              <SidebarEvent key={event.id} event={event} />
-            ))}
-          </ul>
-        </div>
+    <>
+      <b>{eventInfo.timeText}</b>
+      <i>{eventInfo.event.title}</i>
+    </>
+  )
+}
+
+function Sidebar({ weekendsVisible, handleWeekendsToggle, currentEvents }) {
+  return (
+    <div className='schedule-sidebar'>
+      <div className='schedule-sidebar-section'>
+        <h2>Add lesson(s) to the schedule</h2>
+        <ul>
+          <AddEvent />
+        </ul>
       </div>
-      )
+      <div className='schedule-sidebar-section'>
+        <label>
+          <input
+            type='checkbox'
+            checked={weekendsVisible}
+            onChange={handleWeekendsToggle}
+          ></input>
+          toggle weekends
+        </label>
+      </div>
+      <div className='schedule-sidebar-section'>
+        <h2>All Events ({currentEvents.length})</h2>
+        <ul>
+          {currentEvents.map((event) => (
+            <SidebarEvent key={event.id} event={event} />
+          ))}
+        </ul>
+      </div>
+    </div>
+  )
 }
 
-      function SidebarEvent({event}) {
+function SidebarEvent({ event }) {
   return (
-      <li key={event.id}>
-        <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b>
-        <i>{event.title}</i>
-      </li>
-      )
+    <li key={event.id}>
+      <b>{formatDate(event.start, { year: 'numeric', month: 'short', day: 'numeric' })}</b>
+      <i>{event.title}</i>
+    </li>
+  )
 }
 
