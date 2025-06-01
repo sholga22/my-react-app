@@ -7,6 +7,7 @@ import interactionPlugin from '@fullcalendar/interaction'
 import { INITIAL_EVENTS, createEventId } from '../event-utils.ts'
 
 import { AddEvent } from '../components/AddEvent'
+import { useSendToMake } from '../hooks/SendToMake'
 
 
 import '../App.css'
@@ -16,7 +17,8 @@ export default function App() {
   const [weekendsVisible, setWeekendsVisible] = useState(true)
   const [currentEvents, setCurrentEvents] = useState([])
 
-  const calendarRef = useRef(null) // <-- REF for calendar
+  const calendarRef = useRef(null)      // REF for calendar
+  const { send } = useSendToMake();     // send to make.com
 
   console.log("Weekend data weekendsVisible:", weekendsVisible);
 
@@ -53,8 +55,11 @@ export default function App() {
   }
 
   function handleEventClick(clickInfo: any) {
-    if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
-      clickInfo.event.remove()
+    // if (confirm(`Are you sure you want to delete the event '${clickInfo.event.title}'`)) {
+    //  clickInfo.event.remove()
+    //}
+    if (confirm(`Are you sure you want to set info about the event '${clickInfo.event.title}'`)) {
+      send({ title: clickInfo.event.title })
     }
   }
 
@@ -139,7 +144,7 @@ export default function App() {
               checked={weekendsVisible}
               onChange={handleWeekendsToggle}
             ></input>
-            hide weekends
+            show weekends
           </label>
         </div>
         <div className='schedule-sidebar-section'>
