@@ -15,6 +15,8 @@ export default function App() {
   const [weekendsVisible, setWeekendsVisible] = useState(true)
   const [currentEvents, setCurrentEvents] = useState([])
 
+  console.log("Weekend data weekendsVisible:", weekendsVisible);
+
   function handleWeekendsToggle() {
     setWeekendsVisible(!weekendsVisible)
   }
@@ -90,13 +92,14 @@ function renderEventContent(eventInfo) {
   )
 }
 
+
 function Sidebar({ weekendsVisible, handleWeekendsToggle, currentEvents }) {
   return (
     <div className='schedule-sidebar'>
       <div className='schedule-sidebar-section'>
         <h2>Add lesson(s) to the schedule</h2>
         <ul>
-          <AddEvent />
+          <AddEvent showWeekends={weekendsVisible} />
         </ul>
       </div>
       <div className='schedule-sidebar-section'>

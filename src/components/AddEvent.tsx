@@ -1,6 +1,14 @@
 import React, { useState } from "react";
+import { useForm } from 'react-hook-form';
 
-export const AddEvent = ({ showWeekends }) => {
+type AddEventProps = {
+    showWeekends: boolean;
+};
+
+export function AddEvent({ showWeekends }): AddEventProps {
+
+    console.log("Weekend data:", showWeekends);
+
     const [teacher, setTeacher] = useState("");
     const [student, setStudent] = useState("");
     const [subject, setSubject] = useState("");
@@ -17,6 +25,21 @@ export const AddEvent = ({ showWeekends }) => {
         sunday: false,
     });
 
+    const allDays = [
+        ["monday", "Mon"],
+        ["tuesday", "Tue"],
+        ["wednesday", "Wed"],
+        ["thursday", "Thu"],
+        ["friday", "Fri"],
+        ["saturday", "Sat"],
+        ["sunday", "Sun"],
+    ];
+
+    // Если showWeekends = false — исключаем субботу и воскресенье
+    const daysToShow = showWeekends
+        ? allDays
+        : allDays.filter(([dayKey]) => dayKey !== "saturday" && dayKey !== "sunday");
+
     const handleCheckboxChange = (day) => {
         setWeekDays((prev) => ({ ...prev, [day]: !prev[day] }));
     };
@@ -26,21 +49,6 @@ export const AddEvent = ({ showWeekends }) => {
 
         // You can combine date and time into one string or a Date object
         const dateTime = date && time ? `${date}T${time}` : null;
-
-        const allDays = [
-            ["monday", "Mon"],
-            ["tuesday", "Tue"],
-            ["wednesday", "Wed"],
-            ["thursday", "Thu"],
-            ["friday", "Fri"],
-            ["saturday", "Sat"],
-            ["sunday", "Sun"],
-        ];
-
-        // Если showWeekends = false — исключаем субботу и воскресенье
-        const daysToShow = showWeekends
-            ? allDays
-            : allDays.filter(([dayKey]) => dayKey !== "saturday" && dayKey !== "sunday");
 
 
         console.log("Submitted data:", formData);
@@ -113,15 +121,7 @@ export const AddEvent = ({ showWeekends }) => {
             <div>
                 <label>Week Days:</label>
                 <div>
-                    {[
-                        ["monday", "Mon"],
-                        ["tuesday", "Tue"],
-                        ["wednesday", "Wed"],
-                        ["thursday", "Thu"],
-                        ["friday", "Fri"],
-                        ["saturday", "Sat"],
-                        ["sunday", "Sun"],
-                    ].map(([dayKey, dayLabel]) => (
+                    {daysToShow.map(([dayKey, dayLabel]) => (
                         <label key={dayKey} style={{ marginRight: 10 }}>
                             <input
                                 type="checkbox"
