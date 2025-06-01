@@ -3,9 +3,17 @@ import { useForm } from 'react-hook-form';
 
 type AddEventProps = {
     showWeekends: boolean;
-};
+    calendarRef: React.RefObject<any>;
+    addNewEvent: (event: any) => void;
+    currentEvents: any[]; // можно указать более точный тип, если хочешь
+}
 
-export function AddEvent({ showWeekends }): AddEventProps {
+export function AddEvent({
+    showWeekends,
+    addNewEvent,
+    calendarRef,
+    currentEvents
+}): AddEventProps {
 
     console.log("Weekend data:", showWeekends);
 
@@ -51,8 +59,26 @@ export function AddEvent({ showWeekends }): AddEventProps {
         const dateTime = date && time ? `${date}T${time}` : null;
 
 
-        console.log("Submitted data:", formData);
-        // here you can send data to server or use it further
+        console.log("Submitted data:", {
+            teacher,
+            student,
+            subject,
+            date,
+            time,
+            paidLessons,
+            weekDays
+        });
+        //============================  can send data to server or use it further
+        if (!dateTime) return;
+
+        const newEvent = {
+            id: `${Date.now()}`, // или uuid, или createEventId()
+            title: `${teacher} → ${student} (${subject})`,
+            start: dateTime,
+            allDay: false,
+        };
+
+        addNewEvent(newEvent); // send data to FullCalendar in Schedule 
     };
 
     return (
