@@ -22,7 +22,7 @@ export function AddEvent({
     const [subject, setSubject] = useState("");
     const [date, setDate] = useState(""); // date without time
     const [time, setTime] = useState(""); // time only
-    const [paidLessons, setPaidLessons] = useState(0);
+    const [paidLessons, setPaidLessons] = useState(1);
     const [weekDays, setWeekDays] = useState({
         monday: false,
         tuesday: false,
@@ -143,22 +143,23 @@ export function AddEvent({
                     required
                 />
             </div>
-
-            <div>
-                <label>Week Days:</label>
+            {paidLessons > 1 && (
                 <div>
-                    {daysToShow.map(([dayKey, dayLabel]) => (
-                        <label key={dayKey} style={{ marginRight: 10 }}>
-                            <input
-                                type="checkbox"
-                                checked={weekDays[dayKey]}
-                                onChange={() => handleCheckboxChange(dayKey)}
-                            />
-                            {dayLabel}
-                        </label>
-                    ))}
+                    <label>Week Days:</label>
+                    <div>
+                        {daysToShow.map(([dayKey, dayLabel]) => (
+                            <label key={dayKey} style={{ marginRight: 10 }}>
+                                <input
+                                    type="checkbox"
+                                    checked={weekDays[dayKey]}
+                                    onChange={() => handleCheckboxChange(dayKey)}
+                                />
+                                {dayLabel}
+                            </label>
+                        ))}
+                    </div>
                 </div>
-            </div>
+            )}
 
             <button type="submit" style={{ marginTop: 10 }}>
                 Create event(s)
