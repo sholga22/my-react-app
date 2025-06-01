@@ -1,4 +1,5 @@
 import { AddEntity } from '../components/AddEntity';
+import { ReadEntity } from '../components/ReadEntity';
 import { teacherConfig, studentConfig, subjectConfig } from '../config/configEntities';
 
 export default function Home() {
@@ -10,7 +11,8 @@ export default function Home() {
       <Sidebar />
 
       <div className='schedule-main'>
-        <h1>Welcome!</h1>;
+        <h1>Welcome!</h1>
+        <ReadEntity />
       </div>
     </div>
 

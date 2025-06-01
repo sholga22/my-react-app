@@ -29,16 +29,6 @@
       "name": "Apinsh",
       "phone": "01604509210",
       "id": 6
-    },
-    {
-      "name": "Sakara",
-      "phone": "01604509210",
-      "id": 7
-    },
-    {
-      "name": "Sakara",
-      "phone": "12345",
-      "id": 8
     }
   ],
   "students": [
@@ -69,11 +59,6 @@
       "name": "Italian",
       "level": "B2",
       "id": 4
-    },
-    {
-      "name": "English",
-      "level": "B2",
-      "id": 5
     }
   ]
 }

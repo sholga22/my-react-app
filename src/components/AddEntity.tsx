@@ -52,7 +52,7 @@ export function AddEntity({ config }: AddEntityProps) {
             type={field.type}
             {...register(field.name, { required: field.required })}
           />
-          {errors[field.name] && <p style={{ color: 'red' }}>Это поле обязательно</p>}
+          {errors[field.name] && <p style={{ color: 'red' }}>This field is required</p>}
         </div>
       ))}
       <button type="submit">Add</button>
