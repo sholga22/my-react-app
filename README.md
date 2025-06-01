@@ -1,54 +1,45 @@
-# React + TypeScript + Vite
+# React Schedule Manager
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is a web application built with React + TypeScript to manage lesson schedules between teachers and students. It supports:
 
-Currently, two official plugins are available:
+- adding teachers, students, and subjects via configurable forms;
+- creating one or multiple lessons based on selected weekdays;
+- integration with [Make.com](https://www.make.com/) (via Webhook);
+- visualizing the schedule using [FullCalendar](https://fullcalendar.io/);
+- storing data using `json-server` (local mock API).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Technologies
 
-## Expanding the ESLint configuration
+- React 18
+- TypeScript
+- React Hook Form
+- React Router v6
+- FullCalendar
+- json-server
+- Make.com
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+###  Installation & Running
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 1. Clone the repository
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+git clone https://github.com/your-username/react-schedule-manager.git
+cd react-schedule-manager
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### 2. Install dependencies
+npm install
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+### 3. Run JSON server
+npx json-server --watch db.json --port 3001
+node server.js
+### 4. Run React app
+npm run dev
+
+####  Project Structure
+
+src/  
+├── components/        # Shared components (Layout, forms, etc.)  
+├── hooks/             # Custom hooks (e.g. useSendToMake)  
+├── pages/             # Pages (Home, Schedule, About)  
+├── config/            # Form configuration (teachers, students, etc.)  
+├── router.tsx         # Route configuration  
+└── main.tsx           # Application entry point  
