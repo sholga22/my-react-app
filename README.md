@@ -31,8 +31,12 @@ npm install
 ### 3. Run JSON server
 npx json-server --watch db.json --port 3001
 node server.js
+
 ### 4. Run React app
 npm run dev
+
+### 5. Jest for test
+npm install --save-dev jest @testing-library/react @testing-library/jest-dom @types/jest
 
 ####  Project Structure
 
